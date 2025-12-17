@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聖誕節交換禮物</title>
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5933290508786919"
+     crossorigin="anonymous"></script>
+    
+    <!-- 聯盟廣告 -->
+    <script>var ConverlyCustomData = {channelId: null};</script>
+    <script async defer src="https://cdn.affiliates.one/production/adlinks/5cf270f7431fc30a7943ffeb151fe35d322fc4061aa3a09cc5cc884210293a8a.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 50%, #1a472a 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 聖誕節背景動畫 */
+        @keyframes snowfall {
+            0% { transform: translateY(-100px) translateX(0); opacity: 1; }
+            100% { transform: translateY(100vh) translateX(100px); opacity: 0.3; }
+        }
+        
+        @keyframes giftFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 20px;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 1;
+            animation: snowfall linear infinite;
+        }
+        
+        .gift-decoration {
+            position: fixed;
+            font-size: 30px;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 1;
+            animation: giftFloat 3s ease-in-out infinite;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            color: #c41e3a;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #c41e3a;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+        }
+        .btn {
+            width: 100%;
+            padding: 16px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #c41e3a 0%, #8b1a2e 100%);
+            color: white;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        }
+        .btn-small {
+            padding: 10px;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        textarea {
+            min-height: 100px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        input[readonly] {
+            background: #f0f0f0;
+        }
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #c41e3a;
+        }
+        .info-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .info-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        .activity-item {
+            background: white;
+            padding: 16px;
+            margin: 10px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .activity-item:hover {
+            transform: translateY(-2px);
+        }
+        .activity-name {
+            font-weight: 600;
+            font-size: 18px;
+            color: #c41e3a;
+            margin-bottom: 8px;
+        }
+        .activity-date {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .activity-participants {
+            font-size: 14px;
+            color: #999;
+        }
+        .player-list {
+            margin: 20px 0;
+        }
+        .player-item {
+            background: white;
+            padding: 16px;
+            margin: 10px 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .player-name {
+            font-weight: 600;
+            font-size: 17px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .player-gift {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .gift-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .gift-available {
+            background: #d4edda;
+            color: #155724;
+        }
+        .gift-taken {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        .status-bar {
+            background: linear-gradient(135deg, #c41e3a 0%, #8b1a2e 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-group .btn {
+            flex: 1;
+        }
+        
+        /* 廣告容器 */
+        .ad-container {
+            margin: 20px 0;
+            padding: 10px;
+            text-align: center;
+            min-height: 90px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ad-container-top {
+            margin-bottom: 20px;
+        }
+        .ad-container-bottom {
+            margin-top: 20px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            cursor: pointer;
+        }
+        
+        /* 轉盤樣式 */
+        .wheel-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 30px auto;
+        }
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 10px solid #c41e3a;
+            position: relative;
+            transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.3),
+                        inset 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+        .wheel-center {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #c41e3a 0%, #8b1a2e 100%);
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 3px solid #ffd700;
+        }
+        .wheel-pointer {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #c41e3a;
+            z-index: 20;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+        }
+        .wheel-names {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 16px;
+            font-weight: 700;
+            color: #8b1a2e;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+        .result-box {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            border: 3px solid #c41e3a;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(196, 30, 58, 0.3);
+        }
+        .result-name {
+            font-size: 36px;
+            font-weight: 700;
+            color: #c41e3a;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- 聖誕節裝飾 -->
+    <div class="snowflake" style="left: 10%; animation-duration: 10s; animation-delay: 0s;">❄</div>
+    <div class="snowflake" style="left: 20%; animation-duration: 12s; animation-delay: 2s;">❄</div>
+    <div class="snowflake" style="left: 30%; animation-duration: 15s; animation-delay: 4s;">❄</div>
+    <div class="snowflake" style="left: 40%; animation-duration: 11s; animation-delay: 1s;">❄</div>
+    <div class="snowflake" style="left: 50%; animation-duration: 13s; animation-delay: 3s;">❄</div>
+    <div class="snowflake" style="left: 60%; animation-duration: 14s; animation-delay: 5s;">❄</div>
+    <div class="snowflake" style="left: 70%; animation-duration: 10s; animation-delay: 2s;">❄</div>
+    <div class="snowflake" style="left: 80%; animation-duration: 12s; animation-delay: 4s;">❄</div>
+    <div class="snowflake" style="left: 90%; animation-duration: 11s; animation-delay: 1s;">❄</div>
+    
+    <div class="gift-decoration" style="top: 10%; left: 5%; animation-delay: 0s;">🎁</div>
+    <div class="gift-decoration" style="top: 20%; right: 5%; animation-delay: 1s;">🎄</div>
+    <div class="gift-decoration" style="bottom: 20%; left: 8%; animation-delay: 2s;">🎅</div>
+    <div class="gift-decoration" style="bottom: 15%; right: 8%; animation-delay: 1.5s;">⭐</div>
+    
+    <div class="container">
+        <h1>🎁 聖誕節交換禮物</h1>
+
+        <!-- 首頁 -->
+        <div id="home-section" class="section active">
+            <div class="card" style="background: #fff3cd; border-left: 4px solid #ffc107;">
+                <h2 style="color: #856404;">📋 使用規則與限制</h2>
+                <div style="font-size: 14px; line-height: 1.8; color: #856404;">
+                    <p style="margin: 8px 0;">1. 每個活動都有專屬連結，請妥善保管</p>
+                    <p style="margin: 8px 0;">2. <strong>只能透過邀請連結參加活動</strong></p>
+                    <p style="margin: 8px 0;">3. 輸入電話可查詢活動資訊，但無法加入</p>
+                    <p style="margin: 8px 0;">4. 公開活動可被搜尋，但仍需連結才能參加</p>
+                    <p style="margin: 8px 0;">5. 發起人電話僅用於查詢，不會公開顯示</p>
+                    <p style="margin: 8px 0;">6. 請勿惡意建立或破壞活動</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>查看我的活動</h2>
+                <label class="label">輸入發起人電話</label>
+                <input type="tel" id="my-phone-input" placeholder="請輸入您的電話號碼">
+                <button class="btn" onclick="loadMyActivities()">查看我的活動</button>
+            </div>
+
+            <div class="card">
+                <h2>搜尋公開活動</h2>
+                <label class="label">選擇日期</label>
+                <input type="date" id="search-date-input">
+                <button class="btn" onclick="searchByDate()">搜尋</button>
+            </div>
+
+            <div class="card">
+                <button class="btn" onclick="showCreateForm()">新建立交換禮物活動</button>
+            </div>
+            
+            <!-- 聯盟廣告 -->
+            <div class="ad-container ad-container-bottom"></div>
+        </div>
+
+        <!-- 我的活動列表 -->
+        <div id="my-activities-section" class="section">
+            <div class="status-bar">我的活動</div>
+            
+            <!-- Google Ads 自動廣告 -->
+            <div class="ad-container ad-container-top"></div>
+            
+            <div id="my-activities-list"></div>
+            <button class="btn btn-secondary" onclick="showHome()">返回首頁</button>
+            
+            <!-- 聯盟廣告 -->
+            <div class="ad-container ad-container-bottom"></div>
+        </div>
+
+        <!-- 日期搜尋結果 -->
+        <div id="date-search-section" class="section">
+            <div class="status-bar">
+                搜尋結果：<span id="search-date-display"></span>
+            </div>
+            <div id="date-search-list"></div>
+            <button class="btn btn-secondary" onclick="showHome()">返回首頁</button>
+        </div>
+
+        <!-- 建立活動表單 -->
+        <div id="create-form-section" class="section">
+            <div class="card">
+                <h2>建立交換禮物活動</h2>
+                
+                <label class="label">活動名稱 *</label>
+                <input type="text" id="activity-name" placeholder="例如：公司聖誕趴">
+                
+                <label class="label">發起人姓名 *</label>
+                <input type="text" id="host-name-input" placeholder="請輸入您的姓名">
+                
+                <label class="label">發起人電話 *</label>
+                <input type="tel" id="host-phone-input" placeholder="請輸入聯絡電話">
+                
+                <label class="label">交換禮物時間 *</label>
+                <input type="datetime-local" id="exchange-datetime-input">
+                
+                <label class="label">交換禮物地點 *</label>
+                <input type="text" id="exchange-location-input" placeholder="請輸入地點">
+                
+                <label class="checkbox-label">
+                    <input type="checkbox" id="is-public-checkbox">
+                    設為公開活動（其他人可透過日期搜尋看到）
+                </label>
+                
+                <button class="btn" onclick="createActivity()">建立活動</button>
+                <button class="btn btn-secondary" onclick="showHome()">返回</button>
+            </div>
+        </div>
+
+        <!-- 活動資訊 - 發起人視角 -->
+        <div id="activity-info-section" class="section">
+            <div class="card">
+                <h2 style="text-align: center; color: #667eea;" id="activity-title-display">活動名稱</h2>
+                
+                <div class="info-box">
+                    <div class="info-label">發起人</div>
+                    <div class="info-value" id="host-info-display">---</div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-label">發起時間</div>
+                    <div class="info-value" id="create-time-display">---</div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-label">交換時間</div>
+                    <div class="info-value" id="exchange-time-display">---</div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-label">交換地點</div>
+                    <div class="info-value" id="exchange-location-display">---</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <label class="label">邀請連結</label>
+                <input type="text" id="invite-link-display" readonly>
+                <button class="btn" onclick="copyInviteLink()">複製連結</button>
+            </div>
+            
+            <div class="card">
+                <h2>參加者名單（<span id="info-participant-count">0</span>人）</h2>
+                <div id="info-participants-list"></div>
+                <button class="btn btn-success" onclick="showAddParticipantForm()">新增參加者</button>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-success" onclick="enterGameFromInfo()">開始交換禮物</button>
+                <button class="btn btn-danger" onclick="confirmDeleteActivity()">刪除活動</button>
+            </div>
+            <button class="btn btn-secondary" onclick="backToMyActivities()">返回</button>
+            
+            <!-- Google Ads 自動廣告 -->
+            <div class="ad-container ad-container-bottom"></div>
+        </div>
+
+        <!-- 參加活動 - 輸入代碼 -->
+        <div id="join-code-section" class="section">
+            <div class="card">
+                <h2>參加活動</h2>
+                <label class="label">輸入活動代碼</label>
+                <input type="text" id="join-code-input" placeholder="6位數代碼" 
+                       maxlength="6" style="text-align: center; font-size: 24px; letter-spacing: 4px; text-transform: uppercase;">
+                <button class="btn" onclick="joinByCode()">確認</button>
+                <button class="btn btn-secondary" onclick="showHome()">返回</button>
+            </div>
+        </div>
+
+        <!-- 活動資訊 - 參加者視角 -->
+        <div id="participant-view-section" class="section">
+            <div class="card" style="background: #fff3cd; border: 2px solid #ffc107;">
+                <p style="color: #856404; font-size: 14px; margin: 0;">
+                    ⚠️ 透過電話查詢只能查看資訊，<strong>無法參加活動</strong><br>
+                    請使用邀請連結才能參加
+                </p>
+            </div>
+            
+            <div class="card">
+                <h2 style="text-align: center; color: #667eea;" id="participant-activity-title">活動名稱</h2>
+                
+                <div class="info-box">
+                    <div class="info-label">發起人</div>
+                    <div class="info-value" id="participant-host-info">---</div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-label">發起時間</div>
+                    <div class="info-value" id="participant-create-time">---</div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-label">交換時間</div>
+                    <div class="info-value" id="participant-exchange-time">---</div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-label">交換地點</div>
+                    <div class="info-value" id="participant-exchange-location">---</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <button class="btn" onclick="viewParticipantsList()">查看參加者名單</button>
+                <button class="btn btn-secondary" onclick="showHome()">返回</button>
+            </div>
+        </div>
+
+        <!-- 透過連結進入 - 參加者視角 -->
+        <div id="link-participant-view-section" class="section">
+            <div class="card">
+                <h2 style="text-align: center; color: #c41e3a;" id="link-activity-title">活動名稱</h2>
+                
+                <div class="info-box">
+                    <div class="info-label">發起人</div>
+                    <div class="info-value" id="link-host-info">---</div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-label">發起時間</div>
+                    <div class="info-value" id="link-create-time">---</div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-label">交換時間</div>
+                    <div class="info-value" id="link-exchange-time">---</div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-label">交換地點</div>
+                    <div class="info-value" id="link-exchange-location">---</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <button class="btn" onclick="viewParticipantsFromLink()">查看參加者名單</button>
+                <button class="btn btn-success" onclick="showJoinForm()">我要參加</button>
+                <button class="btn btn-secondary" onclick="showHome()">返回首頁</button>
+            </div>
+        </div>
+
+        <!-- 透過連結查看參加者 -->
+        <div id="link-view-participants-section" class="section">
+            <div class="status-bar">
+                參加人數: <span id="link-participant-count">0</span>
+            </div>
+            <div id="link-participants-list"></div>
+            <button class="btn btn-success" onclick="showJoinForm()">我也要參加</button>
+            <button class="btn btn-secondary" onclick="backToLinkParticipantView()">返回</button>
+        </div>
+
+        <!-- 查看參加者名單 -->
+        <div id="view-participants-section" class="section">
+            <div class="status-bar">
+                參加人數: <span id="view-participant-count">0</span>
+            </div>
+            <div id="view-participants-list"></div>
+            <button class="btn btn-secondary" onclick="backToParticipantView()">返回</button>
+        </div>
+
+        <!-- 填寫參加資訊 -->
+        <div id="join-form-section" class="section">
+            <div class="card">
+                <h2>填寫參加資訊</h2>
+                
+                <label class="label">您的姓名 *</label>
+                <input type="text" id="participant-name-input" placeholder="請輸入您的姓名">
+                
+                <label class="label">禮物描述</label>
+                <textarea id="participant-gift-input" placeholder="描述您要帶的禮物方向（例如：文具類、美食、3C配件）
+可以先不填，之後再補充"></textarea>
+                
+                <button class="btn btn-success" onclick="saveParticipant()">儲存</button>
+                <button class="btn btn-secondary" onclick="backToParticipantView()">返回</button>
+            </div>
+        </div>
+
+        <!-- 新增參加者表單（發起人用） -->
+        <div id="add-participant-section" class="section">
+            <div class="card">
+                <h2>新增參加者</h2>
+                
+                <label class="label">參加者姓名 *</label>
+                <input type="text" id="add-participant-name" placeholder="請輸入參加者姓名">
+                
+                <label class="label">禮物描述</label>
+                <textarea id="add-participant-gift" placeholder="描述禮物方向（例如：文具類、美食、3C配件）
+可以先不填，之後再補充"></textarea>
+                
+                <button class="btn btn-success" onclick="addParticipantByHost()">新增</button>
+                <button class="btn btn-secondary" onclick="backToActivityInfoFromAdd()">返回</button>
+            </div>
+        </div>
+
+        <!-- 遊戲版面 -->
+        <div id="game-section" class="section">
+            <div class="status-bar">
+                <span id="game-activity-name-display">活動名稱</span>
+            </div>
+
+            <div class="card">
+                <h2>轉盤抽選</h2>
+                <div class="wheel-container">
+                    <div class="wheel-pointer"></div>
+                    <div class="wheel" id="wheel">
+                        <div class="wheel-names" id="wheel-names"></div>
+                        <div class="wheel-center"></div>
+                    </div>
+                </div>
+                <button class="btn btn-success" id="spin-btn" onclick="spinWheel()">開始交換禮物</button>
+                <div id="result-display"></div>
+            </div>
+
+            <div class="card">
+                <h2>禮物管理</h2>
+                <div id="gifts-list"></div>
+            </div>
+
+            <div class="card">
+                <h2>參加者名單（<span id="game-participant-count">0</span>人）</h2>
+                <div id="game-participants-list"></div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="backToActivityInfoFromGame()">返回活動資訊</button>
+            
+            <!-- Google Ads 自動廣告 -->
+            <div class="ad-container ad-container-bottom"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0/dist/umd/supabase.min.js"></script>
+    <script>
+        const SUPABASE_CONFIG = {
+            url: 'https://ilbeqpmwnouxhrblzegk.supabase.co',
+            key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsYmVxcG13bm91eGhyYmx6ZWdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5NzI4MDgsImV4cCI6MjA4MTU0ODgwOH0.pf9fvXJlhF1yRI2ZOjTe3vv27KiY5DmTiI1ZmboSM4E'
+        };
+
+        let supabase;
+        let currentGameCode = null;
+        let currentActivityData = null;
+        let currentUserPhone = null;
+        let pollInterval = null;
+        let wheelRotation = 0;
+        let participants = [];
+
+        // 初始化
+        function init() {
+            supabase = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.key);
+            
+            // 檢查 URL 是否有 code 參數
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            
+            if (code) {
+                currentGameCode = code;
+                loadActivityForParticipant();
+            }
+        }
+
+        // 自動初始化
+        window.addEventListener('DOMContentLoaded', init);
+
+        // 顯示區塊
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // 顯示首頁
+        function showHome() {
+            stopPolling();
+            currentGameCode = null;
+            currentActivityData = null;
+            showSection('home-section');
+        }
+
+        // 格式化日期時間
+        function formatDateTime(date) {
+            const d = new Date(date);
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            const hours = String(d.getHours()).padStart(2, '0');
+            const minutes = String(d.getMinutes()).padStart(2, '0');
+            return `${year}/${month}/${day} ${hours}:${minutes}`;
+        }
+
+        // 載入我的活動
+        async function loadMyActivities() {
+            try {
+                const phone = document.getElementById('my-phone-input').value.trim();
+                
+                if (!phone) {
+                    alert('請輸入電話號碼');
+                    return;
+                }
+
+                currentUserPhone = phone;
+
+                const { data, error } = await supabase
+                    .from('games')
+                    .select('*')
+                    .eq('host_phone', phone)
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                const activities = data || [];
+                displayMyActivities(activities);
+                showSection('my-activities-section');
+            } catch (error) {
+                alert('載入失敗：' + error.message);
+            }
+        }
+
+        // 顯示我的活動列表
+        function displayMyActivities(activities) {
+            const listDiv = document.getElementById('my-activities-list');
+            
+            if (activities.length === 0) {
+                listDiv.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📋</div>
+                        <div>您還沒有建立任何活動</div>
+                    </div>
+                `;
+            } else {
+                listDiv.innerHTML = activities.map(activity => `
+                    <div class="activity-item">
+                        <div class="activity-name">${activity.activity_name}</div>
+                        <div class="activity-date">📅 ${formatDateTime(activity.exchange_datetime)}</div>
+                        <div class="activity-date">📍 ${activity.exchange_location}</div>
+                        <button class="btn btn-small" onclick="viewActivityInfo('${activity.game_code}'); event.stopPropagation();">
+                            了解參加人員
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // 查看活動資訊
+        async function viewActivityInfo(gameCode) {
+            try {
+                currentGameCode = gameCode;
+
+                const { data, error } = await supabase
+                    .from('games')
+                    .select('*')
+                    .eq('game_code', gameCode)
+                    .single();
+
+                if (error) throw error;
+
+                currentActivityData = data;
+                displayActivityInfo();
+                showSection('activity-info-section');
+                startPolling('info');
+            } catch (error) {
+                alert('載入失敗：' + error.message);
+            }
+        }
+
+        // 顯示活動資訊
+        function displayActivityInfo() {
+            const data = currentActivityData;
+            
+            document.getElementById('activity-title-display').textContent = data.activity_name;
+            document.getElementById('host-info-display').textContent = `${data.host_name} (${data.host_phone})`;
+            document.getElementById('create-time-display').textContent = formatDateTime(data.created_at);
+            document.getElementById('exchange-time-display').textContent = formatDateTime(data.exchange_datetime);
+            document.getElementById('exchange-location-display').textContent = data.exchange_location;
+            
+            const baseUrl = window.location.href.split('?')[0];
+            const inviteLink = `${baseUrl}?code=${data.game_code}`;
+            document.getElementById('invite-link-display').value = inviteLink;
+        }
+
+        // 複製邀請連結
+        function copyInviteLink() {
+            const linkInput = document.getElementById('invite-link-display');
+            linkInput.select();
+            document.execCommand('copy');
+            alert('✅ 連結已複製！');
+        }
+
+        // 返回我的活動
+        function backToMyActivities() {
+            stopPolling();
+            loadMyActivities();
+        }
+
+        // 日期搜尋
+        async function searchByDate() {
+            try {
+                const dateInput = document.getElementById('search-date-input').value;
+                
+                if (!dateInput) {
+                    alert('請選擇日期');
+                    return;
+                }
+
+                const searchDate = new Date(dateInput);
+                const startDate = new Date(searchDate);
+                startDate.setHours(0, 0, 0, 0);
+                const endDate = new Date(searchDate);
+                endDate.setHours(23, 59, 59, 999);
+
+                const { data, error } = await supabase
+                    .from('games')
+                    .select('*')
+                    .eq('is_public', true)
+                    .gte('exchange_datetime', startDate.toISOString())
+                    .lte('exchange_datetime', endDate.toISOString())
+                    .order('exchange_datetime');
+
+                if (error) throw error;
+
+                document.getElementById('search-date-display').textContent = dateInput;
+                displayDateSearchResults(data || []);
+                showSection('date-search-section');
+            } catch (error) {
+                alert('搜尋失敗：' + error.message);
+            }
+        }
+
+        // 顯示日期搜尋結果
+        function displayDateSearchResults(activities) {
+            const listDiv = document.getElementById('date-search-list');
+            
+            if (activities.length === 0) {
+                listDiv.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🔍</div>
+                        <div>此日期沒有公開活動</div>
+                    </div>
+                `;
+            } else {
+                listDiv.innerHTML = activities.map(activity => `
+                    <div class="activity-item">
+                        <div class="activity-name">${activity.activity_name}</div>
+                        <div class="activity-date">📅 ${formatDateTime(activity.exchange_datetime)}</div>
+                        <div class="activity-date">👤 發起人：${activity.host_name}</div>
+                        <div style="margin-top: 10px; padding: 10px; background: #fff3cd; border-radius: 8px; font-size: 13px; color: #856404;">
+                            ⚠️ 此為公開活動資訊<br>
+                            需要邀請連結才能參加
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // 顯示建立活動表單
+        function showCreateForm() {
+            showSection('create-form-section');
+        }
+
+        // 建立活動
+        async function createActivity() {
+            try {
+                const activityName = document.getElementById('activity-name').value.trim();
+                const hostName = document.getElementById('host-name-input').value.trim();
+                const hostPhone = document.getElementById('host-phone-input').value.trim();
+                const exchangeDatetime = document.getElementById('exchange-datetime-input').value;
+                const exchangeLocation = document.getElementById('exchange-location-input').value.trim();
+                const isPublic = document.getElementById('is-public-checkbox').checked;
+
+                if (!activityName || !hostName || !hostPhone || !exchangeDatetime || !exchangeLocation) {
+                    alert('請填寫所有必填欄位');
+                    return;
+                }
+
+                currentGameCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+                currentUserPhone = hostPhone;
+                
+                const { data, error } = await supabase
+                    .from('games')
+                    .insert({
+                        game_code: currentGameCode,
+                        activity_name: activityName,
+                        host_name: hostName,
+                        host_phone: hostPhone,
+                        exchange_datetime: exchangeDatetime,
+                        exchange_location: exchangeLocation,
+                        is_public: isPublic,
+                        max_steals: 3,
+                        game_started: false,
+                        game_ended: false
+                    })
+                    .select()
+                    .single();
+
+                if (error) throw error;
+
+                currentActivityData = data;
+
+                // 發起人自動加入
+                await supabase
+                    .from('participants')
+                    .insert({
+                        game_code: currentGameCode,
+                        name: hostName,
+                        gift: '(發起人)',
+                        player_order: 0
+                    });
+
+                // 清空表單
+                document.getElementById('activity-name').value = '';
+                document.getElementById('host-name-input').value = '';
+                document.getElementById('host-phone-input').value = '';
+                document.getElementById('exchange-datetime-input').value = '';
+                document.getElementById('exchange-location-input').value = '';
+                document.getElementById('is-public-checkbox').checked = false;
+
+                alert('✅ 活動建立成功！');
+                displayActivityInfo();
+                showSection('activity-info-section');
+                startPolling('info');
+            } catch (error) {
+                alert('建立失敗：' + error.message);
+            }
+        }
+
+        // 刪除活動
+        function confirmDeleteActivity() {
+            if (confirm('確定要刪除此活動嗎？\n刪除後所有參與者資料將一併移除。')) {
+                deleteActivity();
+            }
+        }
+
+        async function deleteActivity() {
+            try {
+                const { error } = await supabase
+                    .from('games')
+                    .delete()
+                    .eq('game_code', currentGameCode);
+
+                if (error) throw error;
+
+                alert('✅ 活動已刪除');
+                loadMyActivities();
+            } catch (error) {
+                alert('刪除失敗：' + error.message);
+            }
+        }
+
+        // 顯示輸入代碼
+        function showJoinByCode() {
+            document.getElementById('join-code-input').value = '';
+            showSection('join-code-section');
+        }
+
+        // 通過代碼參加
+        async function joinByCode() {
+            try {
+                const code = document.getElementById('join-code-input').value.trim().toUpperCase();
+                
+                if (!code || code.length !== 6) {
+                    alert('請輸入6位數活動代碼');
+                    return;
+                }
+
+                currentGameCode = code;
+                await loadActivityForParticipant();
+            } catch (error) {
+                alert('載入失敗：' + error.message);
+            }
+        }
+
+        // 載入活動資訊（參加者視角）
+        async function loadActivityForParticipant() {
+            try {
+                const { data, error } = await supabase
+                    .from('games')
+                    .select('*')
+                    .eq('game_code', currentGameCode)
+                    .single();
+
+                if (error || !data) {
+                    alert('活動不存在或已被刪除');
+                    showHome();
+                    return;
+                }
+
+                currentActivityData = data;
+
+                // 透過連結進入 - 顯示完整資訊，可以參加
+                document.getElementById('link-activity-title').textContent = data.activity_name;
+                document.getElementById('link-host-info').textContent = data.host_name;
+                document.getElementById('link-create-time').textContent = formatDateTime(data.created_at);
+                document.getElementById('link-exchange-time').textContent = formatDateTime(data.exchange_datetime);
+                document.getElementById('link-exchange-location').textContent = data.exchange_location;
+
+                showSection('link-participant-view-section');
+            } catch (error) {
+                alert('載入失敗：' + error.message);
+            }
+        }
+
+        // 查看參加者名單
+        function viewParticipantsList() {
+            showSection('view-participants-section');
+            startPolling('view');
+        }
+
+        // 返回參加者視角
+        function backToParticipantView() {
+            stopPolling();
+            showSection('participant-view-section');
+        }
+
+        // 透過連結查看參加者
+        function viewParticipantsFromLink() {
+            showSection('link-view-participants-section');
+            startPolling('link-view');
+        }
+
+        // 返回連結進入的活動頁面
+        function backToLinkParticipantView() {
+            stopPolling();
+            showSection('link-participant-view-section');
+        }
+
+        // 顯示參加表單
+        function showJoinForm() {
+            document.getElementById('participant-name-input').value = '';
+            document.getElementById('participant-gift-input').value = '';
+            showSection('join-form-section');
+        }
+
+        // 儲存參加者
+        async function saveParticipant() {
+            try {
+                const name = document.getElementById('participant-name-input').value.trim();
+                
+                if (!name) {
+                    alert('請輸入您的姓名');
+                    return;
+                }
+
+                const { data: existing } = await supabase
+                    .from('participants')
+                    .select('name')
+                    .eq('game_code', currentGameCode)
+                    .eq('name', name);
+
+                if (existing && existing.length > 0) {
+                    alert('此姓名已被使用');
+                    return;
+                }
+
+                const gift = document.getElementById('participant-gift-input').value.trim() || '(尚未填寫)';
+
+                const { error } = await supabase
+                    .from('participants')
+                    .insert({
+                        game_code: currentGameCode,
+                        name: name,
+                        gift: gift
+                    });
+
+                if (error) throw error;
+
+                alert('✅ 已加入活動！');
+                backToParticipantView();
+            } catch (error) {
+                alert('加入失敗：' + error.message);
+            }
+        }
+
+        // 顯示新增參加者表單（發起人用）
+        function showAddParticipantForm() {
+            document.getElementById('add-participant-name').value = '';
+            document.getElementById('add-participant-gift').value = '';
+            showSection('add-participant-section');
+        }
+
+        // 發起人新增參加者
+        async function addParticipantByHost() {
+            try {
+                const name = document.getElementById('add-participant-name').value.trim();
+                
+                if (!name) {
+                    alert('請輸入參加者姓名');
+                    return;
+                }
+
+                const { data: existing } = await supabase
+                    .from('participants')
+                    .select('name')
+                    .eq('game_code', currentGameCode)
+                    .eq('name', name);
+
+                if (existing && existing.length > 0) {
+                    alert('此姓名已被使用');
+                    return;
+                }
+
+                const gift = document.getElementById('add-participant-gift').value.trim() || '(尚未填寫)';
+
+                const { error } = await supabase
+                    .from('participants')
+                    .insert({
+                        game_code: currentGameCode,
+                        name: name,
+                        gift: gift
+                    });
+
+                if (error) throw error;
+
+                alert('✅ 已新增參加者！');
+                backToActivityInfoFromAdd();
+            } catch (error) {
+                alert('新增失敗：' + error.message);
+            }
+        }
+
+        // 從新增參加者返回活動資訊
+        function backToActivityInfoFromAdd() {
+            showSection('activity-info-section');
+        }
+
+        // 進入遊戲版面（從活動資訊）
+        function enterGameFromInfo() {
+            loadGameMode();
+        }
+
+        // 返回活動資訊（從遊戲）
+        function backToActivityInfoFromGame() {
+            stopPolling();
+            showSection('activity-info-section');
+            startPolling('info');
+        }
+
+        // 進入遊戲模式（從首頁）
+        async function enterGameMode() {
+            try {
+                const activityName = document.getElementById('game-activity-name').value.trim();
+                
+                if (!activityName) {
+                    alert('請輸入活動名稱');
+                    return;
+                }
+
+                const { data, error } = await supabase
+                    .from('games')
+                    .select('*')
+                    .ilike('activity_name', activityName)
+                    .single();
+
+                if (error || !data) {
+                    alert('找不到此活動');
+                    return;
+                }
+
+                currentGameCode = data.game_code;
+                currentActivityData = data;
+                loadGameMode();
+            } catch (error) {
+                alert('載入失敗：' + error.message);
+            }
+        }
+
+        // 載入遊戲模式
+        function loadGameMode() {
+            document.getElementById('game-activity-name-display').textContent = currentActivityData.activity_name;
+            showSection('game-section');
+            startPolling('game');
+        }
+
+        // 轉盤功能
+        function spinWheel() {
+            // 只抽選未被選走的參加者
+            const availableParticipants = participants.filter(p => p.gift !== '已被選走');
+            
+            if (availableParticipants.length === 0) {
+                alert('所有禮物都已被選走了！');
+                return;
+            }
+
+            const spinBtn = document.getElementById('spin-btn');
+            spinBtn.disabled = true;
+
+            const randomIndex = Math.floor(Math.random() * availableParticipants.length);
+            const rotations = 5 + Math.random() * 3;
+            const degreesPerPerson = 360 / availableParticipants.length;
+            const targetDegree = rotations * 360 + (randomIndex * degreesPerPerson);
+            
+            wheelRotation += targetDegree;
+            
+            const wheel = document.getElementById('wheel');
+            wheel.style.transform = `rotate(${wheelRotation}deg)`;
+
+            setTimeout(() => {
+                const winner = availableParticipants[randomIndex];
+                document.getElementById('result-display').innerHTML = `
+                    <div class="result-box">
+                        <div style="font-size: 18px; color: #666;">抽中的是</div>
+                        <div class="result-name">${winner.name}</div>
+                        <div style="font-size: 14px; color: #666; margin-top: 10px;">
+                            禮物：${winner.gift}
+                        </div>
+                    </div>
+                `;
+                spinBtn.disabled = false;
+            }, 3000);
+        }
+
+        // 標記禮物已選走
+        async function toggleGiftStatus(participantId, currentStatus) {
+            try {
+                const newGift = currentStatus === '已被選走' ? '(尚未填寫)' : '已被選走';
+                
+                const { error } = await supabase
+                    .from('participants')
+                    .update({ gift: newGift })
+                    .eq('id', participantId);
+
+                if (error) throw error;
+
+                loadParticipants('game');
+            } catch (error) {
+                alert('更新失敗：' + error.message);
+            }
+        }
+
+        // 開始輪詢
+        function startPolling(type) {
+            loadParticipants(type);
+            if (pollInterval) clearInterval(pollInterval);
+            pollInterval = setInterval(() => loadParticipants(type), 3000);
+        }
+
+        // 停止輪詢
+        function stopPolling() {
+            if (pollInterval) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+            }
+        }
+
+        // 載入參與者
+        async function loadParticipants(type) {
+            try {
+                const { data, error } = await supabase
+                    .from('participants')
+                    .select('*')
+                    .eq('game_code', currentGameCode)
+                    .order('created_at');
+
+                if (error) throw error;
+
+                participants = data || [];
+                
+                if (type === 'info') {
+                    updateInfoParticipantsList(participants);
+                } else if (type === 'view') {
+                    updateViewParticipantsList(participants);
+                } else if (type === 'game') {
+                    updateGameParticipantsList(participants);
+                    updateWheelNames(participants);
+                } else if (type === 'link-view') {
+                    updateLinkViewParticipantsList(participants);
+                }
+            } catch (error) {
+                console.error('載入參與者失敗：', error);
+            }
+        }
+
+        // 更新活動資訊的參與者列表
+        function updateInfoParticipantsList(participants) {
+            const count = participants.length;
+            document.getElementById('info-participant-count').textContent = count;
+
+            const listDiv = document.getElementById('info-participants-list');
+            
+            if (count === 0) {
+                listDiv.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><div>還沒有人參加</div></div>`;
+            } else {
+                listDiv.innerHTML = participants.map(p => `
+                    <div class="player-item">
+                        <div class="player-name">${p.name}</div>
+                        <div class="player-gift">禮物：${p.gift}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // 更新查看參與者列表
+        function updateViewParticipantsList(participants) {
+            const count = participants.length;
+            document.getElementById('view-participant-count').textContent = count;
+
+            const listDiv = document.getElementById('view-participants-list');
+            
+            if (count === 0) {
+                listDiv.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><div>還沒有人參加</div></div>`;
+            } else {
+                listDiv.innerHTML = participants.map(p => `
+                    <div class="player-item">
+                        <div class="player-name">${p.name}</div>
+                        <div class="player-gift">禮物：${p.gift}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // 更新連結查看參與者列表（可以參加）
+        function updateLinkViewParticipantsList(participants) {
+            const count = participants.length;
+            document.getElementById('link-participant-count').textContent = count;
+
+            const listDiv = document.getElementById('link-participants-list');
+            
+            if (count === 0) {
+                listDiv.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><div>還沒有人參加</div></div>`;
+            } else {
+                listDiv.innerHTML = participants.map(p => `
+                    <div class="player-item">
+                        <div class="player-name">${p.name}</div>
+                        <div class="player-gift">禮物：${p.gift}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // 更新遊戲的參與者列表
+        function updateGameParticipantsList(participants) {
+            const count = participants.length;
+            document.getElementById('game-participant-count').textContent = count;
+
+            const listDiv = document.getElementById('game-participants-list');
+            const giftsDiv = document.getElementById('gifts-list');
+            
+            if (count === 0) {
+                listDiv.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><div>還沒有人參加</div></div>`;
+                giftsDiv.innerHTML = listDiv.innerHTML;
+            } else {
+                listDiv.innerHTML = participants.map(p => `
+                    <div class="player-item">
+                        <div class="player-name">${p.name}</div>
+                        <div class="player-gift">禮物：${p.gift}</div>
+                    </div>
+                `).join('');
+
+                giftsDiv.innerHTML = participants.map(p => {
+                    const isTaken = p.gift === '已被選走';
+                    return `
+                        <div class="player-item">
+                            <div class="player-name">${p.name}</div>
+                            <div class="player-gift">禮物：${p.gift}</div>
+                            <span class="gift-status ${isTaken ? 'gift-taken' : 'gift-available'}">
+                                ${isTaken ? '已被選走' : '可選'}
+                            </span>
+                            <button class="btn btn-small ${isTaken ? 'btn-success' : 'btn-danger'}" 
+                                    onclick="toggleGiftStatus(${p.id}, '${isTaken ? '已被選走' : '可選'}')">
+                                ${isTaken ? '標記為可選' : '標記為已選走'}
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        // 更新轉盤名稱（只顯示未被選走的）
+        function updateWheelNames(participants) {
+            const availableParticipants = participants.filter(p => p.gift !== '已被選走');
+            const namesDiv = document.getElementById('wheel-names');
+            if (availableParticipants.length === 0) {
+                namesDiv.innerHTML = '<div style="color: #8b1a2e;">所有禮物已被選走</div>';
+            } else {
+                namesDiv.innerHTML = availableParticipants.map(p => `<div>${p.name}</div>`).join('');
+            }
+        }
+
+        // 頁面卸載時停止輪詢
+        window.addEventListener('beforeunload', stopPolling);
+    </script>
+</body>
+</html>
